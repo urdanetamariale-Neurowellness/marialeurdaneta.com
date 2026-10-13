@@ -21,7 +21,10 @@ jobs:
       - name: Descomprimir sitio
         run: mkdir _site && unzip -q marialeurdaneta_sitio.zip -d _site && ls -la _site
       - name: Correo de contacto
-        run: sed -i 's/maria\.urdaneta@neurowellnesslearning\.com/info@marialeurdaneta.com/g' _site/index.html && grep -c 'info@marialeurdaneta.com' _site/index.html
+        run: |
+          sed -i 's/maria\.urdaneta@neurowellnesslearning\.com/info@marialeurdaneta.com/g' _site/index.html
+          sed -i 's/Escríbeme un correo/info@marialeurdaneta.com/' _site/index.html
+          grep -o '</svg>info@marialeurdaneta.com</a>' _site/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
